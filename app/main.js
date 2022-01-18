@@ -1,4 +1,9 @@
 import { ControllerCards } from './cards/controller_cards.js';
+import { ControllerSort } from './sort/controller_sort.js';
 
-const controller = new ControllerCards();
-controller.init();
+const controllerCards = new ControllerCards();
+// controllerCards.init();
+const controllerSort = new ControllerSort(controllerCards);
+
+
+
