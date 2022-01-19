@@ -28,7 +28,7 @@ export class ModelCards {
     this.data = data;
     return this.data;
   }
-  getSortData(sortType){
+  getSortData =sortType =>{
     const sortVac = { 'sort-up': 1, 'sort-down': -1 };
     this.data.sort((a, b) => (a.price - b.price) * sortVac[sortType]);
     return this.data;

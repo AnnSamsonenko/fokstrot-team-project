@@ -1,13 +1,16 @@
+import { Publisher } from "../publisher.js";
 import { ViewSort } from "./view_sort.js";
 
 export class ControllerSort{
-    constructor(handleClickSortByControllerCards){
-        this.handleClickSortByControllerCards = handleClickSortByControllerCards;
-        this.view = new ViewSort(this.handleClickBntSort.bind(this));
+    constructor(){
+        
+        this.view = new ViewSort(this.handleClickBntSort);
+        this.pub = new Publisher();
     }
-    handleClickBntSort(event){
+    handleClickBntSort =event=>{
         const sortType = event.target.getAttribute('data-sort');
-        this.handleClickSortByControllerCards(sortType);
+
+        this.pub.notice('ON_CLICK_SORT',sortType)
     }
     
 }
