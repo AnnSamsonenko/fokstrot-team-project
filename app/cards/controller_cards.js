@@ -1,3 +1,4 @@
+import { Publisher } from '../publisher.js';
 import { ModelCards } from './model_cards.js';
 import { View } from './view_cards.js';
 
@@ -6,14 +7,17 @@ export class ControllerCards {
     this.model = new ModelCards();
     this.view = new View();
     this.init();
+
+    this.pub = new Publisher();
+    this.pub.subscribe('ON_SORT_CLICK', this.handleClickSort);
   }
   async init() {
     const formattedData = await this.model.fetchData();
     this.view.renderCards(formattedData);
   }
-  handleClickSort(sortType) {
-    console.log(this)
+
+  handleClickSort = sortType => {
     let result = this.model.getSortData(sortType);
     this.view.renderCards(result);
-  }
+  };
 }
