@@ -4,4 +4,4 @@ import { ControllerSort } from './sort/controller_sort.js';
 
 const controllerSection = new ControllerSection();
 const controllerCards = new ControllerCards();
-const controllerSort = new ControllerSort(controllerCards);
+const controllerSort = new ControllerSort(controllerCards.handleClickSort.bind(controllerCards));
