@@ -2,6 +2,9 @@ export class ModelCards {
   BASE_URL =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQJDUGSW4phsIvwWdxlMTUcqhoO0hRHJ8w0AirbHLcPtMRpFEx8JWykKtykGkxTQ6u5eWgYxKjt7cT/pub?output=tsv';
 
+  constructor() {
+    this.data = [];
+  }
   async fetchData() {
     try {
       const response = await fetch(this.BASE_URL);
@@ -22,6 +25,7 @@ export class ModelCards {
         return obj;
       }, {}),
     );
-    return data;
+    this.data = data;
+    return this.data;
   }
 }
