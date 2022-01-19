@@ -29,6 +29,7 @@ export class View {
           </li>`;
       })
       .join('');
+    document.querySelector('.row').innerHTML = '';
     document.querySelector('.row').insertAdjacentHTML('afterbegin', markup);
   }
 }
