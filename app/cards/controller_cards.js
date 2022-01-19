@@ -11,12 +11,9 @@ export class ControllerCards {
     const formattedData = await this.model.fetchData();
     this.view.renderCards(formattedData);
   }
-  sortData(event) {
-    const sortType = { 'sort-up': 1, 'sort-down': -1 };
-    const dataSort = event.target.getAttribute('data-sort');
-    let result = this.model.data.sort((a, b) => {
-      return (a.price - b.price) * sortType[dataSort];
-    });
+  handleClickSort(sortType) {
+    console.log(this)
+    let result = this.model.getSortData(sortType);
     this.view.renderCards(result);
   }
 }

@@ -1,7 +1,8 @@
 export class ViewSort{
-    constructor(){
+    constructor(handleClickBntSort){
         this.renderButton();
-        this.addEvent();
+        this.handleClickBntSort = handleClickBntSort;
+        this.addEvent(this.handleClickBntSort);
     }
 
     renderButton(){
@@ -10,11 +11,11 @@ export class ViewSort{
         <button type="button" class="btn btn-secondary btn-sort" data-sort='sort-down'>Sort price Down</button>`
     }
 
-    addEvent(sort){
+    addEvent(listener){
         const buttons = document.querySelectorAll('.btn-sort');
 
         buttons.forEach(item=>{
-            item.addEventListener('click',sort);
+            item.addEventListener('click',listener);
         })
     }
 }
