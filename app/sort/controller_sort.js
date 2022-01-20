@@ -17,8 +17,27 @@ export class ControllerSort {
     };
     handleChangeSelect = (ev) => {
         const select = ev.target;
-        const filerOption = select.options[select.selectedIndex].value;
-        console.log(filerOption);
+        const filter = ev.target.getAttribute("data-filter");
+
+        const filterOption = select.options[select.selectedIndex].value;
+
+        if (filterOption === "all") {
+            if (filter === "brand") {
+                this.view.enableSelector("#contrySelector");
+            }
+            if (filter === "country") {
+                this.view.enableSelector("#brandSelector");
+            }
+        } else {
+            if (filter === "brand") {
+                this.view.disenableSelector("#contrySelector");
+            }
+            if (filter === "country") {
+                this.view.disenableSelector("#brandSelector");
+            }
+        }
+
+        this.pub.notify("ON_FILTER_CLICK", { filterOption, filter });
     };
 
     handleAddOporFilter = (obj) => {

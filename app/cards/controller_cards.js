@@ -9,6 +9,7 @@ export class ControllerCards {
         this.init();
         this.pub = new Publisher();
         this.pub.subscribe("ON_SORT_CLICK", this.handleClickSort);
+        this.pub.subscribe("ON_FILTER_CLICK", this.handleFilterData);
     }
 
     async init() {
@@ -33,12 +34,30 @@ export class ControllerCards {
     };
     addOptionForFilter = (idSelect, titleRow) => {
         const brandFilter = [
-            ...new Set(this.model.data.map((item) => item[titleRow])),
+            ...new Set(
+                this.model.intermediateData.map((item) => item[titleRow])
+            ),
         ];
         const arg = {
             id: idSelect,
             data: brandFilter,
         };
         this.pub.notify("ADD_OPTION_FILTER", arg);
+    };
+    handleFilterData = ({ filterOption, filter }) => {
+        console.log(filter);
+        console.log(filterOption);
+
+        const result = this.model.getFilerData(filter, filterOption);
+        // if (filter == "brand") {
+        //     this.addOptionForFilter("contrySelector", "country");
+        // } else {
+        //     this.addOptionForFilter("brandSelector", "brand");
+        // }
+        // this.addOptionForFilter("brandSelector", "brand");
+
+        this.view.renderCards(result);
+        // this.addOptionForFilter("brandSelector", "brand");
+        // this.addOptionForFilter("contrySelector", "country");
     };
 }

@@ -12,14 +12,14 @@ export class ViewSort {
         controlBlock.innerHTML = `<button type="button" class="btn btn-secondary btn-sort" data-sort='sort-up'>Sort price Up</button>
         <button type="button" class="btn btn-secondary btn-sort" data-sort='sort-down'>Sort price Down</button> 
         <section>
-        <label for="brandSelector">Brand </label>
-        <select id='brandSelector'class="form-select" aria-label="Default select example">
+        <label for="brandSelector">Brand</label>
+        <select id='brandSelector'class="form-select" aria-label="Default select example" data-filter="brand">
 
         </select>
         </section>
         <section>
-        <label for="contrySelector">Country </label>
-        <select id="contrySelector" class="form-select" aria-label="Default select example">
+        <label for="contrySelector">Country</label>
+        <select id="contrySelector" class="form-select" aria-label="Default select example " data-filter="country">
             
         </select>
         </section>`;
@@ -35,14 +35,25 @@ export class ViewSort {
 
     addOptionFilter = (obj) => {
         const select = document.querySelector(`#${obj.id}`);
-        select.innerHTML = obj.data
+        let html = `<option value="all">ALL</option>`;
+        html += obj.data
             .map((item) => ` <option value="${item}">${item}</option>`)
             .join("\n");
+
+        select.innerHTML = html;
     };
     addListenersForSelect = (ev) => {
         const options = document.querySelectorAll("select");
         options.forEach((item) => {
             item.addEventListener("change", ev);
         });
+    };
+    disenableSelector = (id) => {
+        console.log(id);
+        document.querySelector(id).setAttribute("disabled", "disabled");
+    };
+    enableSelector = (id) => {
+        console.log(id);
+        document.querySelector(id).removeAttribute("disabled");
     };
 }
