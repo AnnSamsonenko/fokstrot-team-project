@@ -5,6 +5,7 @@ export class ModelCards {
   constructor() {
     this.data = [];
   }
+
   async fetchData() {
     try {
       const response = await fetch(this.BASE_URL);
@@ -26,11 +27,20 @@ export class ModelCards {
       }, {}),
     );
     this.data = data;
+
     return this.data;
   }
-  getSortData(sortType){
+
+  getSortData(sortType) {
     const sortVac = { 'sort-up': 1, 'sort-down': -1 };
-    this.data.sort((a, b) => (a.price - b.price) * sortVac[sortType]);
-    return this.data;
+    const sortedData = [...this.data].sort((a, b) => (a.price - b.price) * sortVac[sortType]);
+    return sortedData;
+  }
+
+  getObjForModalById(event) {
+    const card = event.target.closest('.card');
+    const id = card.dataset.id;
+    const objectForModal = this.data.find(obj => obj.id === id);
+    return objectForModal;
   }
 }
