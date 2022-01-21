@@ -45,19 +45,7 @@ export class ControllerCards {
         this.pub.notify("ADD_OPTION_FILTER", arg);
     };
     handleFilterData = ({ filterOption, filter }) => {
-        console.log(filter);
-        console.log(filterOption);
-
-        const result = this.model.getFilerData(filter, filterOption);
-        // if (filter == "brand") {
-        //     this.addOptionForFilter("contrySelector", "country");
-        // } else {
-        //     this.addOptionForFilter("brandSelector", "brand");
-        // }
-        // this.addOptionForFilter("brandSelector", "brand");
-
+        const result = this.model.getFilterData(filter, filterOption);
         this.view.renderCards(result);
-        // this.addOptionForFilter("brandSelector", "brand");
-        // this.addOptionForFilter("contrySelector", "country");
     };
 }

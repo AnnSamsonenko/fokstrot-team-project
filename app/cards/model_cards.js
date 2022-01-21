@@ -41,7 +41,7 @@ export class ModelCards {
         return sortedData;
     }
 
-    getFilerData(filter, filterOption) {
+    getFilterData(filter, filterOption) {
         if (filterOption === "all") {
             this.intermediateData = this.data;
             return this.intermediateData;

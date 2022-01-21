@@ -49,11 +49,9 @@ export class ViewSort {
         });
     };
     disenableSelector = (id) => {
-        console.log(id);
         document.querySelector(id).setAttribute("disabled", "disabled");
     };
     enableSelector = (id) => {
-        console.log(id);
         document.querySelector(id).removeAttribute("disabled");
     };
 }
