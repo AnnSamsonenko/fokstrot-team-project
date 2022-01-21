@@ -5,13 +5,13 @@ export class ViewHeader {
     const markup = `<header class='header-page'>
         <div class='container-md container-header'>
           <div class='logo'>
-          <a href='/' class='logo-link'>
+          <a href='./index.html' class='logo-link'>
             <img class="logo" width='64' height='64' src="./images/logo3.png"/>
           </a>
           </div>
             <ul class="header-nav">
                 <li class="<header-nav-item">
-                    <a href="/" class="header-nav-link">Головна</a>
+                    <a href="./index.html" class="header-nav-link">Головна</a>
                 </li>
                 <li class="header-nav-item">
                     <a href="#" class="header-nav-link">Продукти</a>
