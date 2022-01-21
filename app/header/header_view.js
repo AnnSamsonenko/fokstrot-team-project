@@ -6,7 +6,7 @@ export class ViewHeader {
         <div class='container-md container-header'>
           <div class='logo'>
           <a href='/' class='logo-link'>
-            <img class="logo" width='64' height='64' src="../../images/logo3.png"/>
+            <img class="logo" width='64' height='64' src="./images/logo3.png"/>
           </a>
           </div>
             <ul class="header-nav">
