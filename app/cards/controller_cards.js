@@ -10,6 +10,7 @@ export class ControllerCards {
         this.pub = new Publisher();
         this.pub.subscribe("ON_SORT_CLICK", this.handleClickSort);
         this.pub.subscribe("ON_FILTER_CLICK", this.handleFilterData);
+        this.pub.subscribe("ON_SEARCH_CHANGE", this.handleSearchData);
     }
 
     async init() {
@@ -46,6 +47,10 @@ export class ControllerCards {
     };
     handleFilterData = ({ filterOption, filter }) => {
         const result = this.model.getFilterData(filter, filterOption);
+        this.view.renderCards(result);
+    };
+    handleSearchData = (title) => {
+        const result = this.model.getSearchDaraByTitle(title);
         this.view.renderCards(result);
     };
 }

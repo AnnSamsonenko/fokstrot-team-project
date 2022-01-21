@@ -58,4 +58,11 @@ export class ModelCards {
         const objectForModal = this.data.find((obj) => obj.id === id);
         return objectForModal;
     }
+    getSearchDaraByTitle = (title) => {
+        const rez = this.intermediateData.filter((item) =>
+            item.title.includes(title)
+        );
+        console.log(rez);
+        return rez;
+    };
 }
