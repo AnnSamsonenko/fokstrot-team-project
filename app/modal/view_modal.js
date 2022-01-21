@@ -15,7 +15,7 @@ export class ViewModal {
     const markup = `<div class="modal-card">
         <button type='button' class='modal-close'>X</button>
         <h4 class="modal-title">${title}</h4>
-        <img src="${img}" alt="${title}" class="modal-img" />
+        <img src="${img}" alt="${title}" class="modal-img"/>
         <p class="modal-descr">${description}</p>
         <table class="modal__table">
           <tr>
@@ -37,8 +37,8 @@ export class ViewModal {
         </table>
 
         <div class="modal-order">
-          <span class="modal-price">${price}</span>
-          <button class="modal-add" type="button">Додати в замовлення</button>
+          <span class="modal-price text-price">${price} ₴</span>
+          <button class="card-button modal-add" id='button-add-modal' type="button">Додати в кошик</button>
         </div>
       </div>`;
     refs.BACKDROP_REF.innerHTML = '';
