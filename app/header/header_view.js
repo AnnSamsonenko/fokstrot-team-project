@@ -6,7 +6,7 @@ export class ViewHeader {
         <div class='container-md container-header'>
           <div class='logo'>
           <a href='./index.html' class='logo-link'>
-            <img class="logo" width='64' height='64' src="./images/logo3.png"/>
+           Fok<span class='logo-accent'>S</span>trot
           </a>
           </div>
             <ul class="header-nav">
@@ -31,3 +31,5 @@ export class ViewHeader {
     this.DOC_BODY.insertAdjacentHTML('afterbegin', markup);
   }
 }
+
+// <img class="logo" width='64' height='64' src="./images/logo3.png"/>
