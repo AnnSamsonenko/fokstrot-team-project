@@ -69,4 +69,11 @@ export class ModelCards {
     this.data = updatedData;
     return updatedProduct;
   }
+    getSearchDaraByTitle = (title) => {
+        const rez = this.intermediateData.filter((item) =>
+            item.title.includes(title)
+        );
+        console.log(rez);
+        return rez;
+    };
 }
