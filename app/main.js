@@ -4,10 +4,12 @@ import { ControllerSort } from './sort/controller_sort.js';
 import { ControllerModal } from './modal/controller_modal.js';
 import { ControllerHeader } from './header/header_controller.js';
 import { ControllerButton } from './button/controller_button.js';
+import { ControllerSearch } from "./search/controller_search.js";
 
 const controllerHeader = new ControllerHeader();
 const controllerSection = new ControllerSection();
 const controllerCards = new ControllerCards();
 const controllerSort = new ControllerSort();
 const controllerModal = new ControllerModal();
+const controllerSearch = new ControllerSearch();
 const controllerButton = new ControllerButton();
