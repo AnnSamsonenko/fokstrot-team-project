@@ -99,18 +99,17 @@ export class ViewModal {
             ${trStr}
             </tbody>
         </table>
-        <form>
-            <label for="nmailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="EmailInput" aria-describedby="emailHelp">
+            <form id="formMakeOrder">
+            <label for="nmailInput" class="form-label">Ваш Email</label>
+            <input type="email" class="form-control" id="EmailInput" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
 
-            <label for="nameInput" class="form-label">Ім'я</label>
-            <input type="text" class="form-control" id="nameInput">
+            <label for="nameInput" class="form-label" >Ім'я</label>
+            <input type="text" class="form-control" id="nameInput "required>
 
-            <label for="numnerPhoneInput" class="form-label">tel</label>
-            <input type="email" class="form-control" id="numnerPhoneInput" placeholder="38 (000)-000-0000">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
+            <label for="numnerPhoneInput" class="form-label">Номер телефону</label>
+            <input type="tel" class="form-control mb-2" id="numnerPhoneInput" placeholder="380-000-000000" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}"">
+            <button type="submit" class="btn btn-primary" id="button">Оформити замовлення</button>
+            </form>
         </div>`;
         refs.BACKDROP_REF.innerHTML = "";
         refs.BACKDROP_REF.insertAdjacentHTML("afterbegin", markup);
@@ -159,7 +158,6 @@ export class ViewModal {
         return refs;
     }
     addListenersForDeleteButton = () => {
-        console.log("@@@@@@@@@@");
         const buttons = document.querySelectorAll(".btn-delete-from-cart");
 
         buttons.forEach((item) => {
