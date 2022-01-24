@@ -10,12 +10,14 @@ export class ControllerCards {
     this.pub = new Publisher();
     this.pub.subscribe('ON_SORT_CLICK', this.handleClickSort);
     this.pub.subscribe('ON_FILTER_CLICK', this.handleFilterData);
-        this.pub.subscribe("ON_SEARCH_CHANGE", this.handleSearchData);
-    }
+    this.pub.subscribe('ON_SEARCH_CHANGE', this.handleSearchData);
+    this.pub.subscribe('ON_MODAL_BUTTON_CLICK', this.handleCardClick);
+  }
 
   async init() {
-    const formattedData = await this.model.fetchData();
-    this.view.renderCards(formattedData);
+    await this.model.fetchData();
+    const updatedDataFromLS = this.model.updateDataByStorage();
+    this.view.renderCards(updatedDataFromLS);
     this.addOptionForFilter('brandSelector', 'brand');
     this.addOptionForFilter('contrySelector', 'country');
   }
@@ -61,7 +63,7 @@ export class ControllerCards {
   };
 
   getCardInfo(event) {
-    const card = event.target.closest('.card');
+    const card = event.target.closest('.card') || event.target.closest('.modal-card');
     const id = card.dataset.id;
     const objectActiveCard = this.model.getObjForModalById(id);
     return objectActiveCard;
@@ -74,8 +76,8 @@ export class ControllerCards {
       return 'DELETE';
     }
   }
-    handleSearchData = (title) => {
-        const result = this.model.getSearchDaraByTitle(title);
-        this.view.renderCards(result);
-    };
+  handleSearchData = title => {
+    const result = this.model.getSearchDaraByTitle(title);
+    this.view.renderCards(result);
+  };
 }

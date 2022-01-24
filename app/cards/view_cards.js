@@ -17,7 +17,7 @@ export class ViewCards {
                  <h3 class='card-title'>${title}</h3>
               </div>
               <div class="card-footer">
-                    <button class='card-button ${btnSelector}' id="product-${id}" type="button">${btnText}</button>
+                    <button class='card-button ${btnSelector} button-product-${id}' type="button">${btnText}</button>
                     <small class="text-muted text-price">${price} ₴</small>
               </div>
               </a>
