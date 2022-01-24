@@ -12,6 +12,6 @@ export class ControllerModal {
   handleClickOpenNodal = obj => {
     this.view.renderModal(obj);
     this.view.showModal();
-    this.view.addListenersForCloseModal();
+    this.view.addListenersForCloseModalAndButtonClick();
   };
 }

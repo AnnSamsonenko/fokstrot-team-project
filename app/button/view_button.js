@@ -1,15 +1,19 @@
 export class ViewButton {
   changeButtonAddType({ id }) {
-    const buttonAddRef = document.querySelector(`#product-${id}`);
-    buttonAddRef.textContent = 'Видалити';
-    buttonAddRef.classList.remove('button-add');
-    buttonAddRef.classList.add('button-delete');
+    const buttonAddRef = document.querySelectorAll(`.button-product-${id}`);
+    buttonAddRef.forEach(button => {
+      button.textContent = 'Видалити';
+      button.classList.remove('button-add');
+      button.classList.add('button-delete');
+    });
   }
 
   changeButtonDeleteType({ id }) {
-    const buttonAddRef = document.querySelector(`#product-${id}`);
-    buttonAddRef.textContent = 'Додати в кошик';
-    buttonAddRef.classList.remove('button-delete');
-    buttonAddRef.classList.add('button-add');
+    const buttonDelRef = document.querySelectorAll(`.button-product-${id}`);
+    buttonDelRef.forEach(button => {
+      button.textContent = 'Додати в кошик';
+      button.classList.remove('button-delete');
+      button.classList.add('button-add');
+    });
   }
 }

@@ -1,8 +1,11 @@
+import { Publisher } from '../publisher.js';
+
 export class ViewModal {
   MAIN_REF = document.querySelector('main');
 
   constructor() {
     this.renderBackdrop();
+    this.pub = new Publisher();
   }
 
   renderBackdrop() {
@@ -10,9 +13,22 @@ export class ViewModal {
     this.MAIN_REF.insertAdjacentHTML('beforeend', markup);
   }
 
-  renderModal({ title, country, weight, brand, safetyTemperature, price, description, img }) {
+  renderModal({
+    title,
+    country,
+    weight,
+    brand,
+    safetyTemperature,
+    price,
+    description,
+    img,
+    isInCart,
+    id,
+  }) {
     const refs = this.getRefs();
-    const markup = `<div class="modal-card">
+    const btnSelector = isInCart ? 'button-delete' : 'button-add';
+    const btnText = isInCart ? 'Видалити' : 'Додати в кошик';
+    const markup = `<div class="modal-card" data-id="${id}">
         <button type='button' class='modal-close'>X</button>
         <h4 class="modal-title">${title}</h4>
         <img src="${img}" alt="${title}" class="modal-img"/>
@@ -38,7 +54,7 @@ export class ViewModal {
 
         <div class="modal-order">
           <span class="modal-price text-price">${price} ₴</span>
-          <button class="card-button modal-add" id='button-add-modal' type="button">Додати в кошик</button>
+          <button class="card-button ${btnSelector} button-product-${id}"  type="button">${btnText}</button>
         </div>
       </div>`;
     refs.BACKDROP_REF.innerHTML = '';
@@ -50,23 +66,25 @@ export class ViewModal {
     document.body.style.overflow = 'hidden';
   }
 
-  addListenersForCloseModal() {
+  addListenersForCloseModalAndButtonClick() {
     const refs = this.getRefs();
 
-    refs.BUTTON_CLOSE_REF.addEventListener('click', this.closeModal);
-    window.addEventListener('keydown', this.closeModal);
-    refs.BACKDROP_REF.addEventListener('click', this.closeModal);
+    refs.BUTTON_CLOSE_REF.addEventListener('click', this.handleClick);
+    window.addEventListener('keydown', this.handleClick);
+    refs.BACKDROP_REF.addEventListener('click', this.handleClick);
   }
 
-  closeModal = ({ target, key }) => {
+  handleClick = event => {
     const refs = this.getRefs();
-
+    const { target, key } = event;
     if (target === refs.BACKDROP_REF || target === refs.BUTTON_CLOSE_REF || key === 'Escape') {
       refs.BACKDROP_REF.classList.add('is-hidden');
       refs.BODY_REF.style.overflow = '';
-      refs.BACKDROP_REF.removeEventListener('click', this.closeModal);
-      refs.BUTTON_CLOSE_REF.removeEventListener('click', this.closeModal);
-      window.removeEventListener('keydown', this.closeModal);
+      refs.BACKDROP_REF.removeEventListener('click', this.handleClick);
+      refs.BUTTON_CLOSE_REF.removeEventListener('click', this.handleClick);
+      window.removeEventListener('keydown', this.handleClick);
+    } else if (target.nodeName === 'BUTTON') {
+      this.pub.notify('ON_MODAL_BUTTON_CLICK', event);
     }
   };
 

@@ -1,7 +1,7 @@
 export class ModelCards {
   BASE_URL =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQJDUGSW4phsIvwWdxlMTUcqhoO0hRHJ8w0AirbHLcPtMRpFEx8JWykKtykGkxTQ6u5eWgYxKjt7cT/pub?output=tsv';
-
+  STORAGE_KEY = 'cart';
   constructor() {
     this.data = [];
     this.intermediateData = [];
@@ -69,11 +69,28 @@ export class ModelCards {
     this.data = updatedData;
     return updatedProduct;
   }
-    getSearchDaraByTitle = (title) => {
-        const rez = this.intermediateData.filter((item) =>
-            item.title.includes(title)
-        );
-        console.log(rez);
-        return rez;
-    };
+  getSearchDaraByTitle = title => {
+    const rez = this.intermediateData.filter(item => item.title.includes(title));
+    console.log(rez);
+    return rez;
+  };
+
+  updateDataByStorage() {
+    const parsedDataFromLS = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
+    let updatedData = [];
+    if (parsedDataFromLS) {
+      updatedData = this.data.reduce((acc, dataItem) => {
+        const match = parsedDataFromLS.find(storageItem => dataItem.id === storageItem.id);
+        if (match) {
+          acc.push(match);
+        } else {
+          acc.push(dataItem);
+        }
+        return acc;
+      }, []);
+      this.data = updatedData;
+    }
+
+    return this.data;
+  }
 }
