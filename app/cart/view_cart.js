@@ -4,23 +4,22 @@ export class ViewCart {
     constructor(handelClickOpenCartModal) {
         this.pub = new Publisher();
         this.handelClickOpenCartModal = handelClickOpenCartModal;
-        this.addListenersForCart();
+        this.addListenerBtnCart();
     }
 
-    addListenersForCart(ev) {
-        const bntCart = document.querySelector("#btnCart");
-        bntCart.addEventListener("click", this.handelClickOpenCartModal, false);
+    addListenerBtnCart(ev) {
+        const btnCart = document.querySelector("#btnCart");
+        btnCart.addEventListener("click", this.handelClickOpenCartModal, false);
     }
 
     renderItemsInCart(items) {
         if (items) {
             const tbody = document.querySelector("#tBodyIdCart");
-
-            let trStr = "";
+            let html = ``;
 
             for (let i = 0; i < items.length; i++) {
                 let numer = i + 1;
-                trStr += ` <tr>
+                html += ` <tr>
                         <th scope="row">${numer}</th>
                         <td><img src="${items[i].img}" ></img></td>
                         <td>${items[i].title}</td>
@@ -32,7 +31,7 @@ export class ViewCart {
                         <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${items[i].id}"><i class="bi bi-trash"></i></button></td>
                     </tr>`;
             }
-            tbody.innerHTML = trStr;
+            tbody.innerHTML = html;
         } else {
             const table = document.querySelector("#cartTable");
             table.innerHTML = "";

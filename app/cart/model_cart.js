@@ -1,9 +1,9 @@
 export class ModelCart {
-    getDataCart() {
+    getItemsCart() {
         const data = localStorage.getItem("cart");
         return JSON.parse(data);
     }
-    deleteItemFromCart(id) {
+    deleteItemCart(id) {
         const data = JSON.parse(localStorage.getItem("cart"));
         if (data.length > 1) {
             const result = data.filter((item) => {
@@ -16,7 +16,7 @@ export class ModelCart {
             localStorage.removeItem("cart");
         }
     }
-    updateItemFromCart(id, updateData) {
+    updateItemsCart(id, updateData) {
         const data = JSON.parse(localStorage.getItem("cart"));
         const result = data.map((value) => {
             if (value.id === id) {
@@ -25,8 +25,5 @@ export class ModelCart {
             return value;
         });
         localStorage.setItem("cart", JSON.stringify(result));
-        // const data = JSON.parse(localStorage.getItem("cart"));
-        // const newData = { ...data, ...updateData };
-        // localStorage.setItem("cart", JSON.stringify(newData));
     }
 }

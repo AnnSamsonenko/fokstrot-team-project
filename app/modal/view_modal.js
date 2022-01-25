@@ -63,11 +63,11 @@ export class ViewModal {
     }
     renderCartModal = (obj) => {
         const refs = this.getRefs();
-        let trStr = "";
+        let html = "";
 
         for (let i = 0; i < obj.length; i++) {
             let numer = i + 1;
-            trStr += ` <tr>
+            html += ` <tr>
                         <th scope="row">${numer}</th>
                         <td><img src="${obj[i].img}" ></img></td>
                         <td>${obj[i].title}</td>
@@ -96,7 +96,7 @@ export class ViewModal {
                 </tr>
             </thead>
             <tbody id="tBodyIdCart">
-            ${trStr}
+            ${html}
             </tbody>
         </table>
             <form id="formMakeOrder">
