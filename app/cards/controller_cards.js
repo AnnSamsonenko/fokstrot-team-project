@@ -8,6 +8,7 @@ export class ControllerCards {
     this.view = new ViewCards(this.handleCardClick);
     this.init();
     this.pub = new Publisher();
+    this.pub.subscribe('ON_BUILD_PAGE', this.renderPageByNum);
     this.pub.subscribe('ON_SORT_CLICK', this.handleClickSort);
     this.pub.subscribe('ON_FILTER_CLICK', this.handleFilterData);
     this.pub.subscribe('ON_SEARCH_CHANGE', this.handleSearchData);
@@ -17,7 +18,7 @@ export class ControllerCards {
   async init() {
     await this.model.fetchData();
     const updatedDataFromLS = this.model.updateDataByStorage();
-    this.view.renderCards(updatedDataFromLS);
+    this.pub.notify('ON_INIT_PAG', { wholeData: updatedDataFromLS, currentPage: 1 });
     this.addOptionForFilter('brandSelector', 'brand');
     this.addOptionForFilter('contrySelector', 'country');
   }
@@ -59,7 +60,8 @@ export class ControllerCards {
 
   handleFilterData = ({ filterOption, filter }) => {
     const result = this.model.getFilterData(filter, filterOption);
-    this.view.renderCards(result);
+    console.log(result);
+    this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
   };
 
   getCardInfo(event) {
@@ -76,8 +78,16 @@ export class ControllerCards {
       return 'DELETE';
     }
   }
+
   handleSearchData = title => {
     const result = this.model.getSearchDaraByTitle(title);
     this.view.renderCards(result);
+  };
+
+  renderPageByNum = ({ trimStart, trimEnd }) => {
+    const intermediateData = this.model.getIntermediateData();
+    const dataForPageRender = intermediateData.slice(trimStart, trimEnd);
+    this.model.setActivePageData(dataForPageRender);
+    this.view.renderCards(dataForPageRender);
   };
 }

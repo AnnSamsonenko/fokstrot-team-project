@@ -5,6 +5,7 @@ export class ModelCards {
   constructor() {
     this.data = [];
     this.intermediateData = [];
+    this.activePageData = [];
   }
 
   async fetchData() {
@@ -36,7 +37,7 @@ export class ModelCards {
 
   getSortData(sortType) {
     const sortVac = { 'sort-up': 1, 'sort-down': -1 };
-    const sortedData = [...this.intermediateData].sort(
+    const sortedData = [...this.activePageData].sort(
       (a, b) => (a.price - b.price) * sortVac[sortType],
     );
     return sortedData;
@@ -92,5 +93,13 @@ export class ModelCards {
     }
 
     return this.data;
+  }
+
+  getIntermediateData() {
+    return this.intermediateData;
+  }
+
+  setActivePageData(data) {
+    this.activePageData = data;
   }
 }
