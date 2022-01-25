@@ -4,33 +4,19 @@ export class ViewPagination {
   NUMBER_OF_ITEMS = null;
   CURRENT_PAGE = null;
 
-  countTotalPages = ({ wholeData, currentPage }) => {
-    this.NUMBER_OF_ITEMS = wholeData.length;
-    this.CURRENT_PAGE = currentPage;
-    const numberOfPages = Math.ceil(this.NUMBER_OF_ITEMS / this.ITEMS_PER_PAGE);
-    let markup = '';
-
-    for (let i = 0; i < numberOfPages; i += 1) {
-      markup += `<button class="btn btn-primary"
-    value="${this.CURRENT_PAGE + i}">${this.CURRENT_PAGE + i}</button>`;
-    }
-    return markup;
-  };
-
   renderWrapper = () => {
     this.REF_MAIN.insertAdjacentHTML('beforeend', '<div class="pagination"></div>');
   };
 
-  createPagButtons = markup => {
+  createPagButtons = (totalPages, currentPage) => {
+    let markup = '';
+    for (let i = 0; i < totalPages; i += 1) {
+      markup += `<button class="btn btn-primary"
+                    value="${currentPage + i}">${currentPage + i}</button>`;
+    }
+
     document.querySelector('.pagination').innerHTML = '';
     document.querySelector('.pagination').insertAdjacentHTML('afterbegin', markup);
-  };
-
-  buildPage = clickedPage => {
-    this.CURRENT_PAGE = clickedPage ? clickedPage : 1;
-    const trimStart = (this.CURRENT_PAGE - 1) * this.ITEMS_PER_PAGE;
-    const trimEnd = trimStart + this.ITEMS_PER_PAGE;
-    return { trimStart, trimEnd };
   };
 
   addListenerForPag = listener => {

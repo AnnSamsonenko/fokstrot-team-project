@@ -25,7 +25,7 @@ export class ControllerCards {
 
   handleClickSort = sortType => {
     let result = this.model.getSortData(sortType);
-    this.view.renderCards(result);
+    this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
   };
 
   handleCardClick = event => {
@@ -60,7 +60,6 @@ export class ControllerCards {
 
   handleFilterData = ({ filterOption, filter }) => {
     const result = this.model.getFilterData(filter, filterOption);
-    console.log(result);
     this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
   };
 
@@ -81,13 +80,17 @@ export class ControllerCards {
 
   handleSearchData = title => {
     const result = this.model.getSearchDaraByTitle(title);
-    this.view.renderCards(result);
+    const options = document.querySelectorAll('select');
+    options.forEach(item => {
+      item.removeAttribute('disabled');
+      item.value = 'all';
+    });
+    this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
   };
 
   renderPageByNum = ({ trimStart, trimEnd }) => {
     const intermediateData = this.model.getIntermediateData();
     const dataForPageRender = intermediateData.slice(trimStart, trimEnd);
-    this.model.setActivePageData(dataForPageRender);
     this.view.renderCards(dataForPageRender);
   };
 }
