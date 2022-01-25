@@ -24,8 +24,8 @@ export class ControllerCart {
     };
     handelDeleteItemFromCart = (id) => {
         console.log("11111111");
-        this.model.deleteItemCart(id);
-
+        // this.model.deleteItemCart(id);
+        this.pub.notify("ON_BUTTON_DELETE_CLICK", { id });
         const data = this.model.getItemsCart();
         this.view.renderItemsInCart(data);
         this.pub.notify("ADD_LISTENERS_DELTE_BUTTON");
