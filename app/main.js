@@ -7,6 +7,7 @@ import { ControllerButton } from './button/controller_button.js';
 import { ControllerSearch } from './search/controller_search.js';
 import { ControllerCart } from './cart/controller_cart.js';
 import { ControllerPagination } from './pagination/controller_pagination.js';
+import { ControllerPopup } from './popup/controller_popup.js';
 
 const controllerHeader = new ControllerHeader();
 const controllerSection = new ControllerSection();
@@ -17,3 +18,4 @@ const controllerModal = new ControllerModal();
 const controllerSearch = new ControllerSearch();
 const controllerButton = new ControllerButton();
 const controllerCart = new ControllerCart();
+const controllerPopup = new ControllerPopup();
