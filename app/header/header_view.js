@@ -1,8 +1,8 @@
 export class ViewHeader {
-  DOC_BODY = document.body;
+    DOC_BODY = document.body;
 
-  renderHeader() {
-    const markup = `<header class='header-page'>
+    renderHeader() {
+        const markup = `<header class='header-page'>
         <div class='container-md container-header'>
           <div class='logo'>
           <a href='./index.html' class='logo-link'>
@@ -24,12 +24,12 @@ export class ViewHeader {
                 </li>
             </ul>
              <div class="header-cart">
-               <a class="header-cart-link" href='#'>Кошик</a>
+               <a class="header-cart-link" id='btnCart' href='#'>Кошик</a>
              </div>
         </div>
       </header>`;
-    this.DOC_BODY.insertAdjacentHTML('afterbegin', markup);
-  }
+        this.DOC_BODY.insertAdjacentHTML("afterbegin", markup);
+    }
 }
 
 // <img class="logo" width='64' height='64' src="./images/logo3.png"/>

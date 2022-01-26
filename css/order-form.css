@@ -1,0 +1,13 @@
+/* #formMakeOrder input:invalid {
+    border: 2px solid red;
+}
+
+#formMakeOrder input:valid {
+    border: 1px solid black;
+} */
+.error {
+    border: 2px solid red;
+}
+.info-input {
+    margin-bottom: 10px;
+}
