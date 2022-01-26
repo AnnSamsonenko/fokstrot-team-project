@@ -11,7 +11,7 @@ export class ViewPagination {
   createPagButtons = (totalPages, currentPage) => {
     let markup = '';
     for (let i = 0; i < totalPages; i += 1) {
-      markup += `<button class="btn btn-primary"
+      markup += `<button class="btn btn-pag btn-pag-${i + 1}"
                     value="${currentPage + i}">${currentPage + i}</button>`;
     }
 
@@ -22,4 +22,24 @@ export class ViewPagination {
   addListenerForPag = listener => {
     document.querySelector('.pagination').addEventListener('click', listener);
   };
+
+  removeActiveClass(currentPage) {
+    const allPagBtns = document.querySelectorAll('.btn-pag');
+    allPagBtns.forEach(button => button.classList.remove('btn-pag--active'));
+
+    document.querySelector(`.btn-pag-${currentPage}`).classList.add('btn-pag--active');
+  }
+
+  destroyPagButtons() {
+    document.querySelector('.pagination').innerHTML = '';
+  }
+
+  backToTop() {
+    const SECTION_TITLE_REF = document.querySelector('.pasta-title');
+    const { top: titleHeight } = SECTION_TITLE_REF.getBoundingClientRect();
+    window.scrollBy({
+      top: titleHeight,
+      behavior: 'smooth',
+    });
+  }
 }

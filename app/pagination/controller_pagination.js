@@ -18,7 +18,13 @@ export class ControllerPagination {
 
   initPagination = data => {
     const { totalPages, currentPage } = this.model.countTotalPages(data);
+    if (totalPages === 0) {
+      this.view.destroyPagButtons();
+      return;
+    }
+
     this.view.createPagButtons(totalPages, currentPage);
+    this.view.removeActiveClass(currentPage);
     const gapForSlicing = this.model.buildPage();
     this.pub.notify('ON_BUILD_PAGE', gapForSlicing);
   };
@@ -32,6 +38,8 @@ export class ControllerPagination {
       const clickedPage = Number(event.target.value);
       const gapForSlicing = this.model.buildPage(clickedPage);
       this.pub.notify('ON_BUILD_PAGE', gapForSlicing);
+      this.view.removeActiveClass(clickedPage);
+      this.view.backToTop();
     }
   };
 }

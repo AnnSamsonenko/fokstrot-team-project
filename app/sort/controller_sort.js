@@ -6,6 +6,7 @@ export class ControllerSort {
     this.view = new ViewSort(this.handleClickBntSort, this.handleChangeSelect);
     this.pub = new Publisher();
     this.pub.subscribe('ADD_OPTION_FILTER', this.handleAddOporFilter);
+    this.pub.subscribe('ON_SORT_REMOVE', this.view.setActiveButton);
   }
 
   handleClickBntSort = event => {
@@ -13,6 +14,7 @@ export class ControllerSort {
     this.pub.notify('ON_SORT_CLICK', sortType);
     this.view.setActiveButton(event);
   };
+
   handleChangeSelect = ev => {
     const select = ev.target;
     const filter = ev.target.getAttribute('data-filter');
@@ -36,6 +38,7 @@ export class ControllerSort {
     }
 
     this.pub.notify('ON_FILTER_CLICK', { filterOption, filter });
+    this.view.setActiveButton(ev);
   };
 
   handleAddOporFilter = obj => {
