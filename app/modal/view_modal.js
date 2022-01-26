@@ -99,18 +99,23 @@ export class ViewModal {
             ${html}
             </tbody>
         </table>
-            <form id="formMakeOrder">
-            <label for="nmailInput" class="form-label">Ваш Email</label>
-            <input type="email" class="form-control" id="EmailInput" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+                <form id="formMakeOrder" class='form-info' novalidate>
+                    <label for="nmailInput" class="form-label">Ваш Email</label>
+                    <input type="text" class="form-control info-input info-input-email" id="EmailInput"  name="cliEmail">
+                    
+                    <label for="nameInput" class="form-label" >Ім'я</label>
+                    <input type="text" class="form-control info-input" id="nameInput" name="cliName" >
 
-            <label for="nameInput" class="form-label" >Ім'я</label>
-            <input type="text" class="form-control" id="nameInput "required>
-
-            <label for="numnerPhoneInput" class="form-label">Номер телефону</label>
-            <input type="tel" class="form-control mb-2" id="numnerPhoneInput" placeholder="380-000-000000" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}"">
-            <button type="submit" class="btn btn-primary" id="button">Оформити замовлення</button>
-            </form>
+                    <label for="numnerPhoneInput" class="form-label">Номер телефону</label>
+                    <input type="text" class="form-control info-input info-input-phone" id="numnerPhoneInput" name="cliPhone" >
+                    
+                    <button type="submit" class="btn btn-primary" id="btnMakeOrder">Оформити замовлення</button>
+                </form>
         </div>`;
+
+        //required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        //required
+        // placeholder="380-000-000000" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}"
         refs.BACKDROP_REF.innerHTML = "";
         refs.BACKDROP_REF.insertAdjacentHTML("afterbegin", markup);
     };
@@ -198,5 +203,12 @@ export class ViewModal {
         } else if (target.nodeName === "BUTTON") {
             this.pub.notify("ON_MODAL_BUTTON_CLICK", event);
         }
+    };
+    addLisSentInfOrder = () => {
+        console.log("находит кнопку при рендере");
+        const btn = document.querySelector("#btnMakeOrder");
+        btn.addEventListener("click", (ev) => {
+            this.pub.notify("ADD_LIS_BTN_MAKE_ORDER", ev);
+        });
     };
 }

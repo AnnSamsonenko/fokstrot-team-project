@@ -26,11 +26,11 @@ export class ControllerModal {
     handelClickOpenModalCart = (obj) => {
         this.view.renderCartModal(obj);
         this.view.showModal();
+        this.view.addLisSentInfOrder();
         this.view.addListenersForDeleteButton();
         this.view.addListenerForCloseModalCart();
     };
     habdelAddListenersForDeleteButton = () => {
-        console.log("adkjshfkjs");
         this.view.addListenersForDeleteButton();
     };
 }
