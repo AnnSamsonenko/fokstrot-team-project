@@ -39,6 +39,7 @@ export class ModelCards {
     const sortedData = [...this.intermediateData].sort(
       (a, b) => (a.price - b.price) * sortVac[sortType],
     );
+    this.intermediateData = sortedData;
     return sortedData;
   }
 
@@ -67,11 +68,13 @@ export class ModelCards {
       }
     });
     this.data = updatedData;
+    this.intermediateData = updatedData;
     return updatedProduct;
   }
+
   getSearchDaraByTitle = title => {
-    const rez = this.intermediateData.filter(item => item.title.includes(title));
-    console.log(rez);
+    const rez = this.data.filter(item => item.title.toLowerCase().includes(title.toLowerCase()));
+    this.intermediateData = rez;
     return rez;
   };
 
@@ -89,8 +92,13 @@ export class ModelCards {
         return acc;
       }, []);
       this.data = updatedData;
+      this.intermediateData = updatedData;
     }
 
     return this.data;
+  }
+
+  getIntermediateData() {
+    return this.intermediateData;
   }
 }

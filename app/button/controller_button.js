@@ -15,10 +15,12 @@ export class ControllerButton {
   handleAddClick = obj => {
     this.model.addObjToLocalStorage(obj);
     this.view.changeButtonAddType(obj);
+    this.pub.notify('ON_ADD_MESSAGE', obj);
   };
 
   handleDelClick = obj => {
     this.model.removeObjFromLocalStorage(obj);
     this.view.changeButtonDeleteType(obj);
+    this.pub.notify('ON_DELETE_MESSAGE', obj);
   };
 }
