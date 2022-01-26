@@ -14,8 +14,8 @@ export class ViewSort {
             <div class='sort-btns-wrapper'>
                 <span class="sort-btns-option">Вартiсть</span>
                 <div class="sort-btns">
-                <button type="button" class="btn-sort" data-sort='sort-up'>&#129045;</button>
-                <button type="button" class="btn-sort" data-sort='sort-down'>&#129047;</button>
+                <button type="button" class="btn-sort btn-sort-up" data-sort='sort-up'>&#129045;</button>
+                <button type="button" class="btn-sort btn-sort-down" data-sort='sort-down'>&#129047;</button>
                 </div> 
             </div> 
             <div class="d-flex align-items-baseline block-filter">
@@ -57,4 +57,14 @@ export class ViewSort {
   enableSelector = id => {
     document.querySelector(id).removeAttribute('disabled');
   };
+
+  setActiveButton(event) {
+    if (event.target.classList.contains('btn-sort-up')) {
+      event.target.classList.add('btn-sort--active');
+      document.querySelector('.btn-sort-down').classList.remove('btn-sort--active');
+    } else {
+      event.target.classList.add('btn-sort--active');
+      document.querySelector('.btn-sort-up').classList.remove('btn-sort--active');
+    }
+  }
 }
