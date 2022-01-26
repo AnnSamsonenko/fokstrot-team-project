@@ -38,10 +38,15 @@
   font-size: 14px;
   line-height: 18px;
   color: #ffffff;
-  background-color: var(--deep-yellow-accent);
+  background-color: rgba(253, 184, 39, 0.6);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  transition: background-color 250ms linear;
   /* text-transform: uppercase; */
+}
+
+.btn-sort--active {
+  background-color: var(--deep-yellow-accent);
 }
 
 @media screen and (min-width: 768px) {
