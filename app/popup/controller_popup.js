@@ -8,6 +8,7 @@ export class ControllerPopup {
     this.init();
     this.pub.subscribe('ON_ADD_MESSAGE', this.onAddProduct);
     this.pub.subscribe('ON_DELETE_MESSAGE', this.onDeleteProduct);
+    this.pub.subscribe('ON_EMPTY_CART', this.handleEmptyCart);
   }
 
   init = () => {
@@ -18,5 +19,8 @@ export class ControllerPopup {
   };
   onDeleteProduct = obj => {
     this.view.onDelProduct(obj);
+  };
+  handleEmptyCart = () => {
+    this.view.onEmptyCart();
   };
 }

@@ -14,8 +14,8 @@ export class ViewSort {
             <div class='sort-btns-wrapper'>
                 <span class="sort-btns-option">Вартiсть</span>
                 <div class="sort-btns">
-                <button type="button" class="btn-sort btn-sort-up" data-sort='sort-up'>&#129045;</button>
-                <button type="button" class="btn-sort btn-sort-down" data-sort='sort-down'>&#129047;</button>
+                <button type="button" class="btn-sort btn-sort-up" data-sort='sort-up'></button>
+                <button type="button" class="btn-sort btn-sort-down" data-sort='sort-down'></button>
                 </div> 
             </div> 
             <div class="d-flex align-items-baseline block-filter">
