@@ -34,10 +34,8 @@
 
 .btn-sort {
   padding: 10px;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 18px;
-  color: #ffffff;
+  width: 40px;
+  height: 30px;
   background-color: rgba(253, 184, 39, 0.6);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -47,6 +45,21 @@
 
 .btn-sort--active {
   background-color: var(--deep-yellow-accent);
+}
+
+.btn-sort-up {
+  background-image: url('../images/arrow-up.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  margin-right: 4px;
+}
+
+.btn-sort-down {
+  background-image: url('../images/arrow-down.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
 }
 
 @media screen and (min-width: 768px) {

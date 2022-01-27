@@ -48,4 +48,27 @@ export class ViewPopup {
       POP_UP_REF.classList.add('hide-down');
     }, 2000);
   };
+
+  onEmptyCart = () => {
+    const CONTAINER_REF = document.querySelector('#popup');
+    const markup = `
+    <div class="popup-card popup-delete">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" fill="currentColor" class="bi bi-exclamation-circle popup-cart-del" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+</svg>
+        <p class="popup-message">На жаль, ваш кошик поки що порожній</p>
+    </div>`;
+
+    CONTAINER_REF.innerHTML = '';
+    CONTAINER_REF.insertAdjacentHTML('afterbegin', markup);
+
+    const POP_UP_REF = document.querySelector('.popup-delete');
+    POP_UP_REF.classList.add('show-up');
+
+    setTimeout(() => {
+      POP_UP_REF.classList.remove('show-up');
+      POP_UP_REF.classList.add('hide-down');
+    }, 2000);
+  };
 }
