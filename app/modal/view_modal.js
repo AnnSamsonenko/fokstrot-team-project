@@ -83,7 +83,7 @@ export class ViewModal {
                         <th scope="row"></th>
                         <td></td>
                         <td></td>
-                        <td>Сумма</td>
+                        <td>Сума</td>
                         <td id='sumOrder'>${sumOrder.toFixed(2)}</td>
                         <td></td>
                         <td></td>
