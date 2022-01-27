@@ -36,7 +36,7 @@ export class ControllerCart {
     };
     handleUpdateCountItemsCart = (inputs) => {
         inputs.forEach((item) => {
-            this.model.updateItemsCart(item.dataset.id, item.value);
+            this.model.updateItemsCart(item.dataset.id, parseInt(item.value));
         });
     };
     sendInfOrder = (ev) => {
