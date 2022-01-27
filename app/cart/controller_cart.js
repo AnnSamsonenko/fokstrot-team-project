@@ -112,6 +112,7 @@ export class ControllerCart {
             const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
             fetch(url);
             this.pub.notify("RENDER_DONE_VIEW_CART");
+            localStorage.removeItem("cart");
         } else {
             ev.target.classList.add("disabled");
         }

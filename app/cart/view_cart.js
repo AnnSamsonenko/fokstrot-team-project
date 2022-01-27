@@ -30,7 +30,7 @@ export class ViewCart {
                         
                         <td> <input class="input-count-items-in-cart" type="number" min="1" max="100" step="1" data-id="${items[i].id}"  value="${items[i].isInCart}" onkeydown="return false"></td>
 
-                        <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${items[i].id}"><i class="bi bi-trash"></i></button></td>
+                        <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${items[i].id}"></button></td>
                     </tr>`;
             }
             tbody.innerHTML = html;
@@ -44,13 +44,6 @@ export class ViewCart {
         const bnt = document.querySelector("#btnMakeOrder");
         bnt.classList.add("disabled");
     }
-
-    // addListenerInputNum = () => {
-    //     const inputs = document.querySelector(".input-count-items-in-cart");
-    //     inputs.forEach((value) => {
-    //         value.addEventListener("change", this.handleChangeInputNum);
-    //     });
-    // };
 
     static validateEmail(email) {
         let re =

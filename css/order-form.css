@@ -11,3 +11,13 @@
 .info-input {
     margin-bottom: 10px;
 }
+.btn-delete-from-cart {
+    background-image: url("../node_modules/bootstrap-icons/icons/trash-fill.svg");
+
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-size: 50%;
+    width: 50px;
+    height: 30px;
+}

@@ -75,7 +75,7 @@ export class ViewModal {
                         <td>${obj[i].price}</td>
                         
                         <td> <input class="input-count-items-in-cart" type="number" min="1" max="100" step="1" data-id="${obj[i].id}"  value="${obj[i].isInCart}"></td>
-                        <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${obj[i].id}"><i class="bi bi-trash"></i></button></td>
+                        <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${obj[i].id}"></button></td>
                     </tr>`;
         }
 
