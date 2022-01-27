@@ -17,4 +17,11 @@ export class ModelCart {
         });
         localStorage.setItem("cart", JSON.stringify(result));
     }
+    getSumOrder() {
+        const data = this.getItemsCart();
+        const result = data.reduce((acc, obj) => {
+            return acc + obj.price * obj.isInCart;
+        }, 0);
+        return result.toFixed(2);
+    }
 }
