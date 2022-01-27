@@ -18,9 +18,10 @@ export class ViewCart {
         if (items) {
             const tbody = document.querySelector("#tBodyIdCart");
             let html = ``;
-
+            let sumOrder = 0;
             for (let i = 0; i < items.length; i++) {
                 let numer = i + 1;
+                sumOrder += items[i].price * items[i].isInCart;
                 html += ` <tr data-id="${items[i].id}" class="cart-item">
                         <th scope="row">${numer}</th>
                         <td><img src="${items[i].img}" ></img></td>
@@ -33,6 +34,17 @@ export class ViewCart {
                         <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${items[i].id}"></button></td>
                     </tr>`;
             }
+            html += `<tr class="cart-item">
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td>Сума</td>
+                        <td id='sumOrder'>${sumOrder}</td>
+                        <td></td>
+                        <td></td>
+                       
+                    </tr>`;
+
             tbody.innerHTML = html;
         } else {
             const table = document.querySelector("#cartTable");
