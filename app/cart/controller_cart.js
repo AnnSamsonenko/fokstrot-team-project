@@ -47,8 +47,10 @@ export class ControllerCart {
             console.log(formInputs.length);
             const inputEmail = document.querySelector(".info-input-email");
             const inputPhone = document.querySelector(".info-input-phone");
-            let emailVal = inputEmail.value;
-            let phoneVal = inputPhone.value;
+            const inputName = document.querySelector(".info-input-name");
+            const emailVal = inputEmail.value;
+            const phoneVal = inputPhone.value;
+            const nameVal = inputName.value;
             const emptyInputs = Array.from(formInputs).filter(
                 (input) => input.value === ""
             );
@@ -85,37 +87,34 @@ export class ControllerCart {
             } else {
                 inputPhone.classList.remove("error");
             }
+
+            const ID_CHAR = 134790138;
+            const TG_BASE_URL =
+                "https://api.telegram.org/bot5185514605:AAGlTejFxHndFXm4_9X65IN1Svt0-_Jz4yQ/sendMessage?";
+            let text = `Нове замолення%0Aім\'я: ${nameVal}%0AТел: ${phoneVal}%0AEmail: ${emailVal}%0A`;
+            let sumOrder = 0;
+            const dateOrder = Date.now();
+
+            itemsOrder.forEach((value) => {
+                text += `номер товару ${value["id"]} кількість ${value["isInCart"]}%0A`;
+                sumOrder += parseFloat(value["price"]) * value["isInCart"];
+            });
+
+            sumOrder = sumOrder.toFixed(2);
+            const countProducts = itemsOrder.length;
+            text += `Cумма заказу ${sumOrder}`;
+
+            const data = JSON.parse(localStorage.getItem("historyOrders"));
+
+            data.push({ dateOrder, countProducts, sumOrder });
+            localStorage.setItem("historyOrders", JSON.stringify(data));
+
+            const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
+            fetch(url);
         } else {
             ev.target.classList.add("disabled");
         }
 
-        const ID_CHAR = 134790138;
-        const TG_BASE_URL =
-            "https://api.telegram.org/bot5185514605:AAGlTejFxHndFXm4_9X65IN1Svt0-_Jz4yQ/sendMessage?";
-        let text = "";
-        let sumOrder = 0;
-        const dateOrder = Date.now();
-
-        itemsOrder.forEach((value) => {
-            text += `номер товару ${value["id"]} кількість ${value["isInCart"]} \n`;
-            sumOrder += parseFloat(value["price"]);
-        });
-
-        const countProducts = itemsOrder.length;
-        text += `Cумма заказу ${sumOrder}`;
-
-        const data = JSON.parse(localStorage.getItem("historyOrders"));
-
-        data.push({ dateOrder, countProducts, sumOrder });
-        localStorage.setItem("historyOrders", JSON.stringify(data));
-
-        // localStorage.setItem(
-        //     "historyOrders",
-        //     JSON.stringify({ dateOrder, countProducts, sumOrder })
-        // );
-
-        const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
-        fetch(url);
         //https://api.telegram.org/bot5185514605:AAGlTejFxHndFXm4_9X65IN1Svt0-_Jz4yQ/sendMessage?chat_id=134790138&text=hello
     };
 }

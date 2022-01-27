@@ -26,7 +26,7 @@ export class ViewCart {
                         <td>${items[i].country}</td>
                         <td>${items[i].price}</td>
                         
-                        <td> <input class="input-count-items-in-cart" type="number" min="1" max="100" step="1" data-id="${items[i].id}"  value="${items[i].isInCart}"></td>
+                        <td> <input class="input-count-items-in-cart" type="number" min="1" max="100" step="1" data-id="${items[i].id}"  value="${items[i].isInCart} onkeydown="return false""></td>
 
                         <td> <button type="button" class="btn btn-danger btn-delete-from-cart" data-id="${items[i].id}"><i class="bi bi-trash"></i></button></td>
                     </tr>`;

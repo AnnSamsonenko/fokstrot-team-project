@@ -104,7 +104,7 @@ export class ViewModal {
                     <input type="text" class="form-control info-input info-input-email" id="EmailInput"  name="cliEmail">
                     
                     <label for="nameInput" class="form-label" >Ім'я</label>
-                    <input type="text" class="form-control info-input" id="nameInput" name="cliName" >
+                    <input type="text" class="form-control info-input info-input-name" id="nameInput" name="cliName" >
 
                     <label for="numnerPhoneInput" class="form-label">Номер телефону</label>
                     <input type="text" class="form-control info-input info-input-phone" id="numnerPhoneInput" name="cliPhone" >
