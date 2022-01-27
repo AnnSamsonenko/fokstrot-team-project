@@ -62,9 +62,12 @@ export class ViewSort {
     if (event.target.classList.contains('btn-sort-up')) {
       event.target.classList.add('btn-sort--active');
       document.querySelector('.btn-sort-down').classList.remove('btn-sort--active');
-    } else {
+    } else if (event.target.classList.contains('btn-sort-down')) {
       event.target.classList.add('btn-sort--active');
       document.querySelector('.btn-sort-up').classList.remove('btn-sort--active');
+    } else {
+      const allSortBtns = document.querySelectorAll('.btn-sort');
+      allSortBtns.forEach(button => button.classList.remove('btn-sort--active'));
     }
   }
 }

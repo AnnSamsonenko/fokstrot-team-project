@@ -23,6 +23,12 @@ export class ControllerCards {
     this.addOptionForFilter('contrySelector', 'country');
   }
 
+  renderPageByNum = ({ trimStart, trimEnd }) => {
+    const intermediateData = this.model.getIntermediateData();
+    const dataForPageRender = intermediateData.slice(trimStart, trimEnd);
+    this.view.renderCards(dataForPageRender);
+  };
+
   handleClickSort = sortType => {
     let result = this.model.getSortData(sortType);
     this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
@@ -80,17 +86,20 @@ export class ControllerCards {
 
   handleSearchData = title => {
     const result = this.model.getSearchDaraByTitle(title);
+    this.checkInputMatchesData(result);
+    this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
+  };
+
+  checkInputMatchesData = result => {
     const options = document.querySelectorAll('select');
+    const input = document.querySelector('#searchInput');
+    input.classList.remove('invalid');
+    if (result.length === 0) {
+      input.classList.add('invalid');
+    }
     options.forEach(item => {
       item.removeAttribute('disabled');
       item.value = 'all';
     });
-    this.pub.notify('ON_INIT_PAG', { wholeData: result, currentPage: 1 });
-  };
-
-  renderPageByNum = ({ trimStart, trimEnd }) => {
-    const intermediateData = this.model.getIntermediateData();
-    const dataForPageRender = intermediateData.slice(trimStart, trimEnd);
-    this.view.renderCards(dataForPageRender);
   };
 }

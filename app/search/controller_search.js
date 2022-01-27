@@ -10,5 +10,6 @@ export class ControllerSearch {
   handleSearch = ev => {
     const searchParam = document.querySelector('#searchInput').value;
     this.pub.notify('ON_SEARCH_CHANGE', searchParam);
+    this.pub.notify('ON_SORT_REMOVE', ev);
   };
 }
