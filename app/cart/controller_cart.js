@@ -32,81 +32,81 @@ export class ControllerCart {
       this.model.updateItemsCart(item.dataset.id, parseInt(item.value));
     });
   };
-  sendInfOrder = ev => {
-    const itemsOrder = JSON.parse(localStorage.getItem('cart'));
-    console.log(itemsOrder);
-    if (itemsOrder != 0) {
-      const formInputs = document.querySelectorAll('.info-input');
-      console.log(formInputs.length);
-      const inputEmail = document.querySelector('.info-input-email');
-      const inputPhone = document.querySelector('.info-input-phone');
-      let emailVal = inputEmail.value;
-      let phoneVal = inputPhone.value;
-      const emptyInputs = Array.from(formInputs).filter(input => input.value === '');
+    sendInfOrder = (ev) => {
+        const itemsOrder = JSON.parse(localStorage.getItem("cart"));
+        console.log(itemsOrder);
+        if (itemsOrder != 0) {
+            const formInputs = document.querySelectorAll(".info-input");
+            console.log(formInputs.length);
+            const inputEmail = document.querySelector(".info-input-email");
+            const inputPhone = document.querySelector(".info-input-phone");
+            const inputName = document.querySelector(".info-input-name");
+            const emailVal = inputEmail.value;
+            const phoneVal = inputPhone.value;
+            const nameVal = inputName.value;
+            const emptyInputs = Array.from(formInputs).filter(
+                (input) => input.value === ""
+            );
 
-      formInputs.forEach(input => {
-        if (input.value === '') {
-          input.classList.add('error');
+            formInputs.forEach((input) => {
+                if (input.value === "") {
+                    input.classList.add("error");
+                } else {
+                    input.classList.remove("error");
+                }
+            });
+            if (emptyInputs.length !== 0) {
+                console.log("inputs not filled");
+                return false;
+            }
+            if (!ViewCart.validateEmail(emailVal)) {
+                console.log("email not valid");
+                inputEmail.classList.add("error");
+                return false;
+            } else {
+                inputEmail.classList.remove("error");
+            }
+            if (ViewCart.validateCountry(emailVal)) {
+                console.log("email from Columbia");
+                inputEmail.classList.add("error");
+                return false;
+            } else {
+                inputEmail.classList.remove("error");
+            }
+            if (!ViewCart.validatePhone(phoneVal)) {
+                console.log("phone not valid");
+                inputPhone.classList.add("error");
+                return false;
+            } else {
+                inputPhone.classList.remove("error");
+            }
+
+            const ID_CHAR = 134790138;
+            const TG_BASE_URL =
+                "https://api.telegram.org/bot5185514605:AAGlTejFxHndFXm4_9X65IN1Svt0-_Jz4yQ/sendMessage?";
+            let text = `Нове замолення%0Aім\'я: ${nameVal}%0AТел: ${phoneVal}%0AEmail: ${emailVal}%0A`;
+            let sumOrder = 0;
+            const dateOrder = Date.now();
+
+            itemsOrder.forEach((value) => {
+                text += `номер товару ${value["id"]} кількість ${value["isInCart"]}%0A`;
+                sumOrder += parseFloat(value["price"]) * value["isInCart"];
+            });
+
+            sumOrder = sumOrder.toFixed(2);
+            const countProducts = itemsOrder.length;
+            text += `Cумма заказу ${sumOrder}`;
+
+            const data = JSON.parse(localStorage.getItem("historyOrders"));
+
+            data.push({ dateOrder, countProducts, sumOrder });
+            localStorage.setItem("historyOrders", JSON.stringify(data));
+
+            const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
+            fetch(url);
         } else {
-          input.classList.remove('error');
+            ev.target.classList.add("disabled");
         }
-      });
-      if (emptyInputs.length !== 0) {
-        console.log('inputs not filled');
-        return false;
-      }
-      if (!ViewCart.validateEmail(emailVal)) {
-        console.log('email not valid');
-        inputEmail.classList.add('error');
-        return false;
-      } else {
-        inputEmail.classList.remove('error');
-      }
-      if (ViewCart.validateCountry(emailVal)) {
-        console.log('email from Columbia');
-        inputEmail.classList.add('error');
-        return false;
-      } else {
-        inputEmail.classList.remove('error');
-      }
-      if (!ViewCart.validatePhone(phoneVal)) {
-        console.log('phone not valid');
-        inputPhone.classList.add('error');
-        return false;
-      } else {
-        inputPhone.classList.remove('error');
-      }
-    } else {
-      ev.target.classList.add('disabled');
-    }
 
-    const ID_CHAR = 134790138;
-    const TG_BASE_URL =
-      'https://api.telegram.org/bot5185514605:AAGlTejFxHndFXm4_9X65IN1Svt0-_Jz4yQ/sendMessage?';
-    let text = '';
-    let sumOrder = 0;
-    const dateOrder = Date.now();
-
-    itemsOrder.forEach(value => {
-      text += `номер товару ${value['id']} кількість ${value['isInCart']} \n`;
-      sumOrder += parseFloat(value['price']);
-    });
-
-    const countProducts = itemsOrder.length;
-    text += `Cумма заказу ${sumOrder}`;
-
-    const data = JSON.parse(localStorage.getItem('historyOrders'));
-
-    data.push({ dateOrder, countProducts, sumOrder });
-    localStorage.setItem('historyOrders', JSON.stringify(data));
-
-    // localStorage.setItem(
-    //     "historyOrders",
-    //     JSON.stringify({ dateOrder, countProducts, sumOrder })
-    // );
-
-    const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
-    fetch(url);
-    //https://api.telegram.org/bot5185514605:AAGlTejFxHndFXm4_9X65IN1Svt0-_Jz4yQ/sendMessage?chat_id=134790138&text=hello
-  };
+    };
 }
