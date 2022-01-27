@@ -82,7 +82,7 @@ export class ViewModal {
         const markup = `
         <div class="modal-card" >
         <button type='button' class='modal-close'>X</button>
-      
+        <div class='bodyCard'>
             <h2>Ваше замовлення </h2>
             <table id="cartTable"  class="table">
                 <thead>
@@ -112,7 +112,7 @@ export class ViewModal {
                         
                         <button type="submit" class="btn btn-primary" id="btnMakeOrder">Оформити замовлення</button>
                     </form>
-       
+       </div>
         </div>`;
 
         //required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -166,16 +166,6 @@ export class ViewModal {
         return refs;
     }
 
-    //   addListenersForDeleteButton = () => {
-    //     const buttons = document.querySelectorAll('.btn-delete-from-cart');
-    //     buttons.forEach(item => {
-    //       item.addEventListener('click', () => {
-    //         console.log(item.dataset.id);
-    //         this.pub.notify('DELETE_ITEM_FROM_CART', item.dataset.id);
-    //       });
-    //     });
-    //   };
-
     addListenerForCloseModalCart() {
         const refs = this.getRefs();
         refs.BUTTON_CLOSE_REF.addEventListener("click", this.handleClickCart);
@@ -214,10 +204,24 @@ export class ViewModal {
         }
     };
     addLisSentInfOrder = () => {
-        console.log("находит кнопку при рендере");
         const btn = document.querySelector("#btnMakeOrder");
         btn.addEventListener("click", (ev) => {
             this.pub.notify("ADD_LIS_BTN_MAKE_ORDER", ev);
         });
+    };
+    addListenerInputNum = () => {
+        const inputs = document.querySelectorAll(".input-count-items-in-cart");
+        inputs.forEach((value) => {
+            value.addEventListener("change", (ev) => {
+                this.pub.notify("ADD_LIS_INP_COUNT_ITEM", ev);
+            });
+        });
+    };
+    renderDoneViewOrder = () => {
+        const bodyCart = document.querySelector(".bodyCard");
+        const html =
+            "<h3>Дякую за замовлення, через декілька хвилин вам зателефонуе менеджер</h3>";
+
+        bodyCart.innerHTML = html;
     };
 }

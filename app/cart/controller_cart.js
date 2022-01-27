@@ -16,6 +16,7 @@ export class ControllerCart {
             this.handleUpdateCountItemsCart
         );
         this.pub.subscribe("ADD_LIS_BTN_MAKE_ORDER", this.sendInfOrder);
+        this.pub.subscribe("ADD_LIS_INP_COUNT_ITEM", this.handleChangeInputNum);
     }
     handelClickOpenCartModal = (ev) => {
         const data = this.model.getItemsCart();
@@ -110,8 +111,15 @@ export class ControllerCart {
 
             const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
             fetch(url);
+            this.pub.notify("RENDER_DONE_VIEW_CART");
         } else {
             ev.target.classList.add("disabled");
         }
+    };
+
+    handleChangeInputNum = (ev) => {
+        const idCartProduct = ev.target.getAttribute("data-id");
+        const coutnCartProduct = ev.target.value;
+        this.model.updateItemsCart(idCartProduct, parseInt(coutnCartProduct));
     };
 }

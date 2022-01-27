@@ -4,7 +4,9 @@ export class ViewCart {
     constructor(handelClickOpenCartModal) {
         this.pub = new Publisher();
         this.handelClickOpenCartModal = handelClickOpenCartModal;
+
         this.addListenerBtnCart();
+        // this.addListenerInputNum();
     }
 
     addListenerBtnCart(ev) {
@@ -42,6 +44,14 @@ export class ViewCart {
         const bnt = document.querySelector("#btnMakeOrder");
         bnt.classList.add("disabled");
     }
+
+    // addListenerInputNum = () => {
+    //     const inputs = document.querySelector(".input-count-items-in-cart");
+    //     inputs.forEach((value) => {
+    //         value.addEventListener("change", this.handleChangeInputNum);
+    //     });
+    // };
+
     static validateEmail(email) {
         let re =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -56,6 +66,4 @@ export class ViewCart {
         let re = /^[0-9\s]*$/;
         return re.test(String(phone));
     }
-
-    renderDoneViewOrder = () => {};
 }
