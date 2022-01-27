@@ -38,7 +38,7 @@ export class ViewCart {
                         <th scope="row"></th>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td>Сумма</td>
                         <td id='sumOrder'>${sumOrder}</td>
                         <td></td>
                         <td></td>

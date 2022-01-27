@@ -83,7 +83,7 @@ export class ViewModal {
                         <th scope="row"></th>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td>Сумма</td>
                         <td id='sumOrder'>${sumOrder.toFixed(2)}</td>
                         <td></td>
                         <td></td>
@@ -125,10 +125,6 @@ export class ViewModal {
                     </form>
        </div>
         </div>`;
-
-        //required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-        //required
-        // placeholder="380-000-000000" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}"
         refs.BACKDROP_REF.innerHTML = "";
         refs.BACKDROP_REF.insertAdjacentHTML("afterbegin", markup);
     };
