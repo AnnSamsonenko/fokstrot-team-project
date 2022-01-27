@@ -70,7 +70,10 @@ export class ControllerCards {
   };
 
   getCardInfo(event) {
-    const card = event.target.closest('.card') || event.target.closest('.modal-card');
+    const card =
+      event.target.closest('.card') ||
+      event.target.closest('.cart-item') ||
+      event.target.closest('.modal-card');
     const id = card.dataset.id;
     const objectActiveCard = this.model.getObjForModalById(id);
     return objectActiveCard;
@@ -79,7 +82,10 @@ export class ControllerCards {
   checkButtonMod(event) {
     if (event.target.classList.contains('button-add')) {
       return 'ADD';
-    } else if (event.target.classList.contains('button-delete')) {
+    } else if (
+      event.target.classList.contains('button-delete') ||
+      event.target.classList.contains('btn-delete-from-cart')
+    ) {
       return 'DELETE';
     }
   }
