@@ -1,37 +1,44 @@
-import { Publisher } from '../publisher.js';
-import { ModelCart } from './model_cart.js';
-import { ViewCart } from './view_cart.js';
+import { Publisher } from "../publisher.js";
+import { ModelCart } from "./model_cart.js";
+import { ViewCart } from "./view_cart.js";
 
 export class ControllerCart {
-  constructor() {
-    this.view = new ViewCart(this.handelClickOpenCartModal);
-    this.model = new ModelCart();
-    this.pub = new Publisher();
-    this.pub.subscribe('DELETE_ITEM_FROM_CART', this.handelDeleteItemFromCart);
-    this.pub.subscribe('UPDATE_COUNT_ITEMS_CART', this.handleUpdateCountItemsCart);
-    this.pub.subscribe('ADD_LIS_BTN_MAKE_ORDER', this.sendInfOrder);
-  }
-  handelClickOpenCartModal = ev => {
-    const data = this.model.getItemsCart();
-    if (data) {
-      this.pub.notify('ON_MODAL_CLICK_ON_CART', data);
+    constructor() {
+        this.view = new ViewCart(this.handelClickOpenCartModal);
+        this.model = new ModelCart();
+        this.pub = new Publisher();
+        this.pub.subscribe(
+            "DELETE_ITEM_FROM_CART",
+            this.handelDeleteItemFromCart
+        );
+        this.pub.subscribe(
+            "UPDATE_COUNT_ITEMS_CART",
+            this.handleUpdateCountItemsCart
+        );
+        this.pub.subscribe("ADD_LIS_BTN_MAKE_ORDER", this.sendInfOrder);
+        this.pub.subscribe("ADD_LIS_INP_COUNT_ITEM", this.handleChangeInputNum);
     }
-  };
-  handelDeleteItemFromCart = id => {
-    const data = this.model.getItemsCart();
-    if (data) {
-      this.view.renderItemsInCart(data);
-      this.pub.notify('ADD_LISTENERS_DELTE_BUTTON');
-    } else {
-      this.view.renderItemsInCart(data);
-      this.view.disableOrderBtn();
-    }
-  };
-  handleUpdateCountItemsCart = inputs => {
-    inputs.forEach(item => {
-      this.model.updateItemsCart(item.dataset.id, parseInt(item.value));
-    });
-  };
+    handelClickOpenCartModal = (ev) => {
+        const data = this.model.getItemsCart();
+        if (data) {
+            this.pub.notify("ON_MODAL_CLICK_ON_CART", data);
+        }
+    };
+    handelDeleteItemFromCart = (id) => {
+        const data = this.model.getItemsCart();
+        if (data) {
+            this.view.renderItemsInCart(data);
+            this.pub.notify("ADD_LISTENERS_DELTE_BUTTON");
+        } else {
+            this.view.renderItemsInCart(data);
+            this.view.disableOrderBtn();
+        }
+    };
+    handleUpdateCountItemsCart = (inputs) => {
+        inputs.forEach((item) => {
+            this.model.updateItemsCart(item.dataset.id, parseInt(item.value));
+        });
+    };
     sendInfOrder = (ev) => {
         const itemsOrder = JSON.parse(localStorage.getItem("cart"));
         console.log(itemsOrder);
@@ -104,9 +111,16 @@ export class ControllerCart {
 
             const url = `${TG_BASE_URL}chat_id=${ID_CHAR}&text=${text}`;
             fetch(url);
+            this.pub.notify("RENDER_DONE_VIEW_CART");
+            localStorage.removeItem("cart");
         } else {
             ev.target.classList.add("disabled");
         }
+    };
 
+    handleChangeInputNum = (ev) => {
+        const idCartProduct = ev.target.getAttribute("data-id");
+        const coutnCartProduct = ev.target.value;
+        this.model.updateItemsCart(idCartProduct, parseInt(coutnCartProduct));
     };
 }
