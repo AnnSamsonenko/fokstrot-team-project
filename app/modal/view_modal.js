@@ -121,7 +121,7 @@ export class ViewModal {
                         <label for="numnerPhoneInput" class="form-label">Номер телефону</label>
                         <input type="text" class="form-control info-input info-input-phone" id="numnerPhoneInput" name="cliPhone" >
                         
-                        <button type="submit" class="btn btn-primary" id="btnMakeOrder">Оформити замовлення</button>
+                        <button type="submit" class="btn btn-primary order-button" id="btnMakeOrder">Оформити замовлення</button>
                     </form>
        </div>
         </div>`;
@@ -185,7 +185,7 @@ export class ViewModal {
       this.pub.notify('UPDATE_COUNT_ITEMS_CART', inputs);
 
       window.removeEventListener('keydown', this.handleClickCart);
-    } else if (target.nodeName === 'BUTTON') {
+    } else if (target.nodeName === 'BUTTON' && !target.classList.contains('order-button')) {
       this.pub.notify('ON_MODAL_BUTTON_CLICK', event);
       this.pub.notify('DELETE_ITEM_FROM_CART', event.target.dataset.id);
     }

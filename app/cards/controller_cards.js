@@ -13,6 +13,7 @@ export class ControllerCards {
     this.pub.subscribe('ON_FILTER_CLICK', this.handleFilterData);
     this.pub.subscribe('ON_SEARCH_CHANGE', this.handleSearchData);
     this.pub.subscribe('ON_MODAL_BUTTON_CLICK', this.handleCardClick);
+    this.pub.subscribe('ON_AFTER_ORDER_INIT', this.handleAfterOrderInit);
   }
 
   async init() {
@@ -107,5 +108,11 @@ export class ControllerCards {
       item.removeAttribute('disabled');
       item.value = 'all';
     });
+  };
+
+  handleAfterOrderInit = async () => {
+    await this.model.fetchData();
+    const updatedDataFromLS = this.model.updateDataByStorage();
+    this.pub.notify('ON_INIT_PAG', { wholeData: updatedDataFromLS, currentPage: 1 });
   };
 }
